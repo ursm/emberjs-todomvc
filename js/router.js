@@ -1,8 +1,16 @@
 Todos.Router.map(function() {
-  this.resource('todos', {path: '/'}, function() {
-    this.route('active');
-    this.route('completed');
-  });
+  this.resource('lists', {path: '/'});
+
+//  this.resource('todos', {path: '/'}, function() {
+//    this.route('active');
+//    this.route('completed');
+//  });
+});
+
+Todos.ListsRoute = Ember.Route.extend({
+  model: function() {
+    return this.store.find('list');
+  }
 });
 
 Todos.TodosRoute = Ember.Route.extend({

@@ -7,6 +7,21 @@
   </head>
 
   <body>
+    <script type="text/x-handlebars" data-template-name="lists">
+      <header id="header">
+        <h1>lists</h1>
+      </header>
+      <section id="main">
+        <ul>
+          {{#each}}
+            <li>{{name}}</li>
+          {{/each}}
+        </ul>
+
+        {{input value=newName action="createList"}}
+      </section>
+    </script>
+
     <script type="text/x-handlebars" data-template-name="todos">
       <section id="todoapp">
         <header id="header">
@@ -77,6 +92,7 @@
     <script src="js/models/list.js"></script>
     <script src="js/controllers/todos_controller.js"></script>
     <script src="js/controllers/todos_index_controller.js"></script>
+    <script src="js/controllers/lists_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
   </body>
