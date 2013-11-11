@@ -53,10 +53,12 @@
         {{#each itemController="todo"}}
           <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
             {{#if isEditing}}
-              {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+              {{edit-todo class="edit" value=title insert-newline="acceptChanges"}}
+              {{input type="date" value=deadline focus-out="acceptChanges"}}
             {{else}}
               {{input type="checkbox" checked=isCompleted class="toggle"}}
               <label {{action "editTodo" on="doubleClick"}}>{{title}}</label><button {{action "removeTodo"}} class="destroy"></button>
+              <time>{{deadline}}</time>
             {{/if}}
           </li>
         {{/each}}
