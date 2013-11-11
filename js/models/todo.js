@@ -9,5 +9,7 @@ Todos.Todo = DS.Model.extend({
     if (Ember.isEmpty(deadline)) return false;
 
     return new Date() > new Date(deadline)
-  }.property('deadline')
+  }.property('deadline'),
+
+  hasDeadline: Ember.computed.empty('deadline')
 });
