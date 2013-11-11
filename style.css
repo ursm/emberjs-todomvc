@@ -255,6 +255,16 @@ label[for='toggle-all'] {
 	text-decoration: line-through;
 }
 
+#todo-list li time {
+	padding: 15px;
+	margin-left: 45px;
+	display: block;
+}
+
+#todo-list li.outdated:not(.completed) time {
+	color: #c33;
+}
+
 #todo-list li .destroy {
 	display: none;
 	position: absolute;
