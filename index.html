@@ -11,15 +11,23 @@
       <header id="header">
         <h1>lists</h1>
       </header>
+
       <section id="main">
         <ul>
           {{#each}}
-            <li>{{name}}</li>
+            <li>{{#link-to "list" this}}{{name}}{{/link-to}}</li>
           {{/each}}
         </ul>
 
         {{input value=newName action="createList"}}
       </section>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="list">
+      <header id="header">
+        <h1>{{name}}</h1>
+        {{#link-to "lists"}}&laquo;back{{/link-to}}
+      </header>
     </script>
 
     <script type="text/x-handlebars" data-template-name="todos">

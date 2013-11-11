@@ -1,5 +1,6 @@
 Todos.Router.map(function() {
   this.resource('lists', {path: '/'});
+  this.resource('list', {path: '/list/:list_id'});
 
 //  this.resource('todos', {path: '/'}, function() {
 //    this.route('active');
@@ -10,6 +11,12 @@ Todos.Router.map(function() {
 Todos.ListsRoute = Ember.Route.extend({
   model: function() {
     return this.store.find('list');
+  }
+});
+
+Todos.ListRoute = Ember.Route.extend({
+  model: function(params) {
+    return this.store.find('list', params.list_id);
   }
 });
 
