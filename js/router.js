@@ -1,11 +1,10 @@
 Todos.Router.map(function() {
   this.resource('lists', {path: '/'});
-  this.resource('list', {path: '/list/:list_id'});
 
-//  this.resource('todos', {path: '/'}, function() {
-//    this.route('active');
-//    this.route('completed');
-//  });
+  this.resource('list', {path: '/list/:list_id'}, function() {
+    this.route('active');
+    this.route('completed');
+  });
 });
 
 Todos.ListsRoute = Ember.Route.extend({
@@ -20,42 +19,32 @@ Todos.ListRoute = Ember.Route.extend({
   }
 });
 
-Todos.TodosRoute = Ember.Route.extend({
+Todos.ListIndexRoute = Ember.Route.extend({
   model: function() {
-    return this.store.find('todo');
+    return this.modelFor('list').get('todos');
   },
 });
 
-Todos.TodosIndexRoute = Ember.Route.extend({
-  model: function() {
-    return this.modelFor('todos');
-  }
-});
-
-Todos.TodosActiveRoute = Ember.Route.extend({
-  controllerName: 'todosIndex',
+Todos.ListActiveRoute = Ember.Route.extend({
+  controllerName: 'listIndex',
 
   model: function() {
-    return this.store.filter('todo', function(todo) {
-      return !todo.get('isCompleted');
-    });
+    return this.modelFor('list').get('todos').filterBy('isCompleted', false);
   },
 
   renderTemplate: function() {
-    this.render('todos/index');
+    this.render('list/index');
   }
 });
 
-Todos.TodosCompletedRoute = Ember.Route.extend({
-  controllerName: 'todosIndex',
+Todos.ListCompletedRoute = Ember.Route.extend({
+  controllerName: 'listIndex',
 
   model: function() {
-    return this.store.filter('todo', function(todo) {
-      return todo.get('isCompleted');
-    });
+    return this.modelFor('list').get('todos').filterBy('isCompleted', true);
   },
 
   renderTemplate: function() {
-    this.render('todos/index');
+    this.render('list/index');
   }
 });

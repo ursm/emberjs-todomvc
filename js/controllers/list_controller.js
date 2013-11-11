@@ -1,11 +1,11 @@
-Todos.TodosController = Ember.ArrayController.extend({
+Todos.ListController = Ember.ObjectController.extend({
   actions: {
     createTodo: function() {
       var title = this.get('newTitle');
 
       if (!title.trim()) return;
 
-      var todo = this.store.createRecord('todo', {
+      var todo = this.get('todos').createRecord({
         title: title,
         isCompleted: false
       });
@@ -16,7 +16,7 @@ Todos.TodosController = Ember.ArrayController.extend({
     },
 
     clearCompleted: function() {
-      var completed = this.filterBy('isCompleted', true);
+      var completed = this.get('todos').filterBy('isCompleted', true);
 
       completed.invoke('deleteRecord');
       completed.invoke('save');
@@ -28,12 +28,12 @@ Todos.TodosController = Ember.ArrayController.extend({
   }.property('completed'),
 
   completed: function() {
-    return this.filterBy('isCompleted', true).get('length');
-  }.property('@each.isCompleted'),
+    return this.get('todos').filterBy('isCompleted', true).get('length');
+  }.property('todos.@each.isCompleted'),
 
   remaining: function() {
-    return this.filterBy('isCompleted', false).get('length');
-  }.property('@each.isCompleted'),
+    return this.get('todos').filterBy('isCompleted', false).get('length');
+  }.property('todos.@each.isCompleted'),
 
   inflection: function() {
     var remaining = this.get('remaining');
@@ -43,12 +43,12 @@ Todos.TodosController = Ember.ArrayController.extend({
 
   allAreDone: function(key, value) {
     if (value === undefined) {
-      return !!this.get('length') && this.everyBy('isCompleted', true);
+      return !!this.get('todos.length') && this.get('todos').everyBy('isCompleted', true);
     } else {
-      this.setEach('isCompleted', value);
-      this.invoke('save');
+      this.setEach('todos.isCompleted', value);
+      this.get('todos').invoke('save');
 
       return value;
     }
-  }.property('@each.isCompleted')
+  }.property('todos.@each.isCompleted')
 });
