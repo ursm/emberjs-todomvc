@@ -11,5 +11,7 @@ Todos.Todo = DS.Model.extend({
     return new Date() > new Date(deadline)
   }.property('deadline'),
 
-  hasDeadline: Ember.computed.empty('deadline')
+  hasDeadline: Ember.computed.empty('deadline'),
+
+  list: DS.belongsTo('list')
 });
