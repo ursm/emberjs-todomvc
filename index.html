@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Ember.js • TodoMVC</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="jquery-ui.css">
   </head>
 
   <body>
@@ -54,7 +55,7 @@
           <li {{bind-attr class="isCompleted:completed isEditing:editing isOutdated:outdated"}}>
             {{#if isEditing}}
               {{edit-todo class="edit" value=title insert-newline="acceptChanges"}}
-              {{input type="date" value=deadline focus-out="acceptChanges"}}
+              {{date-picker value=deadline action="acceptChanges"}}
             {{else}}
               {{input type="checkbox" checked=isCompleted class="toggle"}}
               <label {{action "editTodo" on="doubleClick"}}>{{title}}</label><button {{action "removeTodo"}} class="destroy"></button>
@@ -66,6 +67,7 @@
     </script>
 
     <script src="js/libs/jquery-1.10.2.min.js"></script>
+    <script src="js/libs/jquery-ui.js"></script>
     <script src="js/libs/handlebars-1.0.0.js"></script>
     <script src="js/libs/ember.js"></script>
     <script src="js/libs/ember-data.js"></script>
@@ -78,5 +80,6 @@
     <script src="js/controllers/todos_index_controller.js"></script>
     <script src="js/controllers/todo_controller.js"></script>
     <script src="js/views/edit_todo_view.js"></script>
+    <script src="js/views/date_picker_view.js"></script>
   </body>
 </html>
